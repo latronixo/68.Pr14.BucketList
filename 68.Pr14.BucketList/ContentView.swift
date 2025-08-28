@@ -13,8 +13,8 @@ struct ContentView: View {
     
     
     var body: some View {
-        Map()
-            .mapStyle(.imagery)
+        Map(interactionModes: [.rotate, .zoom])
+            .mapStyle(.hybrid(elevation: .realistic))
         
     }
 }
