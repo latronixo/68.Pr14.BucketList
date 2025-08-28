@@ -7,7 +7,19 @@
 
 import SwiftUI
 
+struct User: Identifiable {
+    let id = UUID()
+    var firstName: String
+    var lastName: String
+}
+
 struct ContentView: View {
+    let users = [
+        User(firstName: "Щегловский", lastName: "Максим"),
+        User(firstName: "Зенина", lastName: "Татьяна"),
+        User(firstName: "Зеленская", lastName: "Юлия"),
+    ].sorted()
+    
     var body: some View {
         VStack {
             Image(systemName: "globe")
