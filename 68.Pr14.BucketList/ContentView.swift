@@ -19,7 +19,7 @@ struct ContentView: View {
     var body: some View {
         Map(position: $position)
             .mapStyle(.hybrid(elevation: .realistic))
-            .onMapCameraChange { context in
+            .onMapCameraChange(frequency: .continuous) { context in
                 print(context.region)
             }
         
