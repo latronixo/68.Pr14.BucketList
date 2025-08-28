@@ -15,19 +15,17 @@ struct User: Identifiable {
 
 struct ContentView: View {
     let users = [
-        User(firstName: "Щегловский", lastName: "Максим"),
-        User(firstName: "Зенина", lastName: "Татьяна"),
-        User(firstName: "Зеленская", lastName: "Юлия"),
-    ].sorted()
+        User(firstName: "Максим", lastName: "Щегловский"),
+        User(firstName: "Татьяна", lastName: "Зенина"),
+        User(firstName: "Юлия", lastName: "Зеленская"),
+    ].sorted() {
+        $0.lastName < $1.lastName
+    }
     
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        List(users) { user in
+            Text("\(user.lastName) \(user.firstName)")
         }
-        .padding()
     }
 }
 
