@@ -5,40 +5,22 @@
 //  Created by Валентин on 28.08.2025.
 //
 
-import LocalAuthentication
+import MapKit
 import SwiftUI
 
 struct ContentView: View {
-   @State private var isUnlocked = false
+    let startPosition = MapCameraPosition.region(
+        MKCoordinateRegion(
+            center:  CLLocationCoordinate2D(latitude: 56, longitude: -3),
+            span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10)
+        )
+    )
     
     var body: some View {
-        VStack {
-            if  isUnlocked {
-                Text("Unlocked")
-            } else{
-                Text("Locked")
+        Map(initialPosition: startPosition)
+            .onTapGesture { position in
+                print("Tapped at \(position)")
             }
-        }
-        .onAppear(perform: authenticate)
-    }
-    
-    func authenticate() {
-        let context = LAContext()
-        var error: NSError?
-        
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            let reason = "We neen to unlock your data"
-            
-            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
-                if success {
-                    isUnlocked = true   //успешная аутентификация
-                } else {
-                    //ошибка аутентификации
-                }
-            }
-        } else {
-            // на данном устройстве отсутствует возможность аутентификации по биометрии
-        }
     }
 }
 
