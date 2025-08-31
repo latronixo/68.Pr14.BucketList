@@ -65,11 +65,21 @@ struct ContentView: View {
                 }
             }
         } else {
-            Button("Unlock Places", action: viewModel.authenticate)
-                .padding()
-                .background(.blue)
-                .foregroundStyle(.white)
-                .clipShape(.capsule)
+            VStack {
+                Button("Unlock Places", action: viewModel.authenticate)
+                    .padding()
+                    .background(.blue)
+                    .foregroundStyle(.white)
+                    .clipShape(.capsule)
+                if viewModel.showingErrorAuthentication {
+                    Text("Failed FaceID authentication")
+                        .foregroundStyle(.red)
+                }
+                if viewModel.showingUnableFaceID {
+                    Text("FaceID function is not available on this device.")
+                        .foregroundStyle(.red)
+                }
+            }
         }
     }
 }

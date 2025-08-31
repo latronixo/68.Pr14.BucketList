@@ -17,6 +17,8 @@ extension ContentView {
         var selectedPlace: Location?
         var isUnlocked = false
         var isHybrid = false
+        var showingErrorAuthentication = false
+        var showingUnableFaceID = false
         
         let savePath = URL.documentsDirectory.appending(path: "SavedPlaces")
         
@@ -66,10 +68,13 @@ extension ContentView {
                             self.isUnlocked = true
                         } else {
                             //error
+                            self.showingErrorAuthentication = true
+                            print("Failed FaceID authentication \(String(describing: authenticationError))")
                         }
                     }
             } else {
                 // no biometrics
+                self.showingUnableFaceID = true
             }
         }
         
